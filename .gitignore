@@ -1,0 +1,3 @@
+# CSV datasets
+*.csv
+Data/**/*.csv
