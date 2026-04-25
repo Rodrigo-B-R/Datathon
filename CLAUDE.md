@@ -43,18 +43,36 @@ Full data dictionaries are in `Data/Transacciones/DICCIONARIO_DATOS.md` and `Dat
 
 ## Data Loading Pattern
 
+Use the shared loaders in `src/data_loader.py` — do not duplicate load logic in notebooks:
+
 ```python
-import pandas as pd
+from src.data_loader import load_all, load_clientes, load_transacciones
 
-# Transactions dataset
-clientes = pd.read_csv("Data/Transacciones/hey_clientes.csv")
-productos = pd.read_csv("Data/Transacciones/hey_productos.csv")
-transacciones = pd.read_csv("Data/Transacciones/hey_transacciones.csv")
+data = load_all()  # dict with keys: clientes, productos, transacciones, conversaciones
+```
 
-# Conversations dataset
-convs = pd.read_parquet("Data/Conversaciones/dataset_50k_anonymized.parquet")
+Place the three CSV files under `data/` (gitignored, local only).
+
+## Environment Setup
+
+```bash
+conda env create -f environment.yml
+conda activate datathon
+python -m spacy download es_core_news_lg
+jupyter lab
+```
+
+Pip fallback: `pip install -r requirements.txt`
+
+## Project Structure
+
+```
+notebooks/   # Exploratory analysis — one notebook per topic
+src/         # Shared Python modules imported by notebooks and demo
+demo/        # Streamlit app — run with: streamlit run demo/app.py
+data/        # Local CSV files (gitignored)
 ```
 
 ## .gitignore Notes
 
-All `*.csv` files are gitignored. Only `dataset_50k_anonymized.parquet` is tracked. When adding analysis scripts, track notebooks and Python files but not derived CSVs.
+All `*.csv` files and the `data/` directory are gitignored. Only `dataset_50k_anonymized.parquet` is tracked. Track notebooks and Python files, not derived CSVs.

@@ -1,0 +1,14 @@
+numpy
+pandas
+pyarrow
+scikit-learn
+matplotlib
+seaborn
+plotly
+jupyterlab
+sentence-transformers
+spacy
+bertopic
+umap-learn
+hdbscan
+streamlit

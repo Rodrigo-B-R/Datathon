@@ -1,3 +1,12 @@
 # CSV datasets
 *.csv
 Data/**/*.csv
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Environment
+.env
